@@ -1,11 +1,11 @@
 package com.example.classnavigator.ui.home;
 
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,24 +16,33 @@ import com.example.classnavigator.R;
 import com.example.classnavigator.TimetableDbHelper;
 import com.example.classnavigator.databinding.FragmentHomeBinding;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private Runnable runnable;
+
+    private String lastFetchedDate = ""; // データを最後に取得した日付を保持する変数
+    private String[] subjects;
+    private String[] classrooms;
+    private String[] periods;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // データ取得(グローバルで定義したものを使用)
+        TimetableData timetableData = getData();
+        subjects = timetableData.getSubjects();
+        classrooms = timetableData.getClassrooms();
+        periods = timetableData.getPeriods();
         showData(root);
         setupCountdown();
-
         return root;
     }
 
@@ -41,8 +50,26 @@ public class HomeFragment extends Fragment {
         runnable = new Runnable() {
             @Override
             public void run() {
+                // 現在の日付を取得
+                Calendar calendar = Calendar.getInstance();
+                // 月は0から始まるので+1する
+                String currentDate = String.format(Locale.getDefault(), "%04d-%02d-%02d",
+                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
+
+                // 前回取得した日付と現在の日付を比較
+                if (!currentDate.equals(lastFetchedDate)) {
+                    // 日付が変わった場合はデータを再取得して表示
+                    lastFetchedDate = currentDate;
+                    //新しい曜日のデータを取得
+                    TimetableData timetableData = getData();
+                    subjects = timetableData.getSubjects();
+                    classrooms = timetableData.getClassrooms();
+                    periods = timetableData.getPeriods();
+                    showData(binding.getRoot());
+                }
                 showData(binding.getRoot());
-                handler.postDelayed(this, 1000); // Update every 1 second (1000 milliseconds)
+                // 1秒ごとに再実行
+                handler.postDelayed(this, 1000);
             }
         };
         handler.postDelayed(runnable, 1000); // Initial delay 1 second (to align with the next second)
@@ -55,7 +82,7 @@ public class HomeFragment extends Fragment {
         //現在の曜日
         String[] DaysOfWeek = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         Calendar calendar = Calendar.getInstance();
-        Integer dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         //dayOfWeekではSUNDAY(1)、MONDAY(2)、TUESDAY(3)、WEDNESDAY(4)、THURSDAY(5)、FRIDAY(6)、SATURDAY(7)
         String currentDayOfWeek = DaysOfWeek[dayOfWeek - 2];
         String[] projection = {
@@ -80,14 +107,14 @@ public class HomeFragment extends Fragment {
         List<String> periodsList = new ArrayList<>();
 
         while (cursor.moveToNext()) {
-            Integer id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            //Integer id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             String subject = cursor.getString(cursor.getColumnIndexOrThrow("subject"));
             String classroom = cursor.getString(cursor.getColumnIndexOrThrow("classroom"));
-            Integer period = cursor.getInt(cursor.getColumnIndexOrThrow("period"));
+            int period = cursor.getInt(cursor.getColumnIndexOrThrow("period"));
 
             subjectList.add(subject);
             classroomList.add(classroom);
-            periodsList.add(period.toString());
+            periodsList.add(Integer.toString(period));
         }
         //Listを配列に変換
         String[] subject = subjectList.toArray(new String[0]);
@@ -121,18 +148,17 @@ public class HomeFragment extends Fragment {
         // 現在時刻から授業の開始時刻までの時間差を計算
         int hourDifference = startHour - currentHour;
         int minuteDifference = startMinute - currentMinute;
-        int secondDifference = 0 - currentSecond;
+        int secondDifference = - currentSecond;
         // 秒に変換
-        int totalSeconds = hourDifference * 3600 + minuteDifference * 60 + secondDifference;
-        return totalSeconds;
+        return hourDifference * 3600 + minuteDifference * 60 + secondDifference;
     }
 
     private void showData(View root) {
-        // データ取得
-        TimetableData timetableData = getData();
-        String[] subjects = timetableData.getSubjects();
-        String[] classrooms = timetableData.getClassrooms();
-        String[] periods = timetableData.getPeriods();
+        // データ取得(グローバルで定義したものを使用)
+        //TimetableData timetableData = getData();
+        //String[] subjects = timetableData.getSubjects();
+        //String[] classrooms = timetableData.getClassrooms();
+        //String[] periods = timetableData.getPeriods();
 
         // 表示用リスト作成
         List<String> times_display = new ArrayList<>();
@@ -162,6 +188,7 @@ public class HomeFragment extends Fragment {
         listView.setAdapter(adapter);
     }
 
+    @SuppressLint("DefaultLocale")
     private String formatTimeDifference(int totalSeconds) {
         // 分と秒に変換
         int hour = totalSeconds / 3600;
@@ -176,9 +203,9 @@ public class HomeFragment extends Fragment {
     }
 
     //時間割の開始時刻と終了時刻を保存するためのクラス
-    class Period {
-        private String startTime;
-        private String endTime;
+    static class Period {
+        private final String startTime;
+        private final String endTime;
         public Period(String startTime, String endTime) {
             this.startTime = startTime;
             this.endTime = endTime;
@@ -186,15 +213,13 @@ public class HomeFragment extends Fragment {
         public String getStartTime() {
             return startTime;
         }
-        public String getEndTime() {
-            return endTime;
-        }
+        public String getEndTime() {return endTime;}
     }
 
-    public class TimetableData {
-        private String[] subjects;
-        private String[] classrooms;
-        private String[] periods;
+    public static class TimetableData {
+        private final String[] subjects;
+        private final String[] classrooms;
+        private final String[] periods;
 
         public TimetableData(String[] subjects, String[] classrooms, String[] periods) {
             this.subjects = subjects;
