@@ -1,0 +1,32 @@
+<resources>
+    <!-- Default -->
+    <string name="app_name">ClassNavigator</string>
+    <string name="title_home">ホーム</string>
+    <string name="title_dashboard">時間割表</string>
+    <string name="title_notifications">追加・削除</string>
+
+    <!-- 時間割表に使用 -->
+    <string name="monday">月</string>
+    <string name="tuesday">火</string>
+    <string name="wednesday">水</string>
+    <string name="thursday">木</string>
+    <string name="friday">金</string>
+
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+
+    <!--　入力ページにしよう -->
+    <string name="label_subject">教科名</string>
+    <string name="hint_subject">教科名を入力</string>
+    <string name="label_class_name">教室</string>
+    <string name="hint_class_name">教室を入力</string>
+    <string name="label_day_of_week">曜日</string>
+    <string name="hint_day_of_week">曜日を選択</string>
+    <string name="label_period">時間</string>
+    <string name="hint_period">何時間目かを選択</string>
+    <string name="button_add_data">登録する</string>
+
+</resources>

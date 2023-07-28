@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- ヘッダー行 -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text=""
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/monday"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/tuesday"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/wednesday"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/thursday"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/friday"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <!-- 1時間目 -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cell_border"
+                android:text="@string/one"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Mon1"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Tue1"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Wed1"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Thu1"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Fri1"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:background="@drawable/cell_border"
+                android:text="" />
+        </TableRow>
+
+        <!-- 2時間目 -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/two"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Mon2"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Tue2"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Wed2"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Thu2"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Fri2"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+        </TableRow>
+
+        <!-- 3時間目 -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/three"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Mon3"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Tue3"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Wed3"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Thu3"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Fri3"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+        </TableRow>
+
+        <!-- 4時間目 -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/four"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Mon4"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Tue4"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Wed4"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Thu4"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Fri4"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+        </TableRow>
+
+        <!-- 5時間目 -->
+        <TableRow>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="@string/five"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Mon5"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Tue5"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Wed5"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Thu5"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/Fri5"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:background="@drawable/cell_border"
+                android:text="" />
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
