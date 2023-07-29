@@ -28,12 +28,12 @@ public class MyWidget extends AppWidgetProvider {
             int appWidgetId = appWidgetIds[i];
 
             // ウィジェットをクリックしたときに開きたいアクティビティや画面
-            //Intent intent = new Intent(context, MainActivity.class);
-            //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+            Intent intent = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
             // App Widgetのレイアウトを取得し、ボタンにオンクリックリスナーを添付
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
-            //views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
+            views.setOnClickPendingIntent(R.id.widget_layout, pendingIntent);
 
             // 1秒ごとにshowData()メソッドを呼び出すための処理
             if (runnable != null) {

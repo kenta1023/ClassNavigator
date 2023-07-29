@@ -1,6 +1,6 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="120dp"
-    android:minHeight="100dp"
+    android:minWidth="145dp"
+    android:minHeight="70dp"
     android:updatePeriodMillis="3600000"
     android:previewImage="@drawable/ic_launcher_foreground"
     android:initialLayout="@layout/widget"

@@ -1,5 +1,7 @@
 package com.example.classnavigator;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.classnavigator.databinding.ActivityMainBinding;
 
@@ -38,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // Update the widget when the MainActivity is created
+        updateWidget();
     }
 
+    private void updateWidget() {
+        Log.e("test","apudadt");
+        // Get the AppWidgetManager and the ComponentName for the widget
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        ComponentName componentName = new ComponentName(this, MyWidget.class);
+
+        // Update the widget using the onUpdate() method of the AppWidgetProvider
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(componentName);
+        MyWidget widgetProvider = new MyWidget();
+        widgetProvider.onUpdate(this, appWidgetManager, appWidgetIds);
+    }
 }
