@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateWidget() {
-        Log.e("test","apudadt");
         // Get the AppWidgetManager and the ComponentName for the widget
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         ComponentName componentName = new ComponentName(this, MyWidget.class);
