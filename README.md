@@ -1,0 +1,2 @@
+# ClassNavigator
+次の授業の情報を素早く得ることを目的としたAndroidアプリケーション。
