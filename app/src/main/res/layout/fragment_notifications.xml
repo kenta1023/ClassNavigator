@@ -6,66 +6,93 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <!-- CardView for the whole card -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_subject" />
+        android:layout_margin="8dp"
+        android:elevation="4dp">
 
-    <EditText
-        android:id="@+id/editSubject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:minHeight="48dp"
-        android:hint="@string/hint_subject" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_class_name" />
+            <!-- TextView for the Subject -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_subject" />
 
-    <EditText
-        android:id="@+id/editClassRoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:minHeight="48dp"
-        android:hint="@string/hint_class_name" />
+            <!-- EditText for the Subject -->
+            <EditText
+                android:id="@+id/editSubject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:minHeight="48dp"
+                android:hint="@string/hint_subject" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_day_of_week" />
+            <!-- TextView for the Class Name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_class_name" />
 
-    <Spinner
-        android:id="@+id/spinnerDayOfWeek"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minWidth="200dp"
-        android:minHeight="48dp"
-        android:hint="@string/hint_day_of_week"
-        android:entries="@array/day_of_week_options" />
+            <!-- EditText for the Class Name -->
+            <EditText
+                android:id="@+id/editClassRoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:minHeight="48dp"
+                android:hint="@string/hint_class_name" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_period" />
+            <!-- TextView for the Day of Week -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_day_of_week" />
 
-    <Spinner
-        android:id="@+id/spinnerPeriod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_period"
-        android:minWidth="200dp"
-        android:minHeight="48dp"
-        android:entries="@array/period_options" />
+            <!-- Spinner for the Day of Week -->
+            <Spinner
+                android:id="@+id/spinnerDayOfWeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:minHeight="48dp"
+                android:hint="@string/hint_day_of_week"
+                android:entries="@array/day_of_week_options" />
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_add_data" />
+            <!-- TextView for the Period -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_period" />
 
+            <!-- Spinner for the Period -->
+            <Spinner
+                android:id="@+id/spinnerPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_period"
+                android:minWidth="200dp"
+                android:minHeight="48dp"
+                android:entries="@array/period_options" />
+
+            <!-- Button for adding data -->
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/button_add_data" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- ListView or other content below the card -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
