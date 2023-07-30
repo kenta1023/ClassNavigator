@@ -98,11 +98,11 @@ public class HomeFragment extends Fragment {
         TimetableDbHelper helper = new TimetableDbHelper(getContext());
         SQLiteDatabase db = helper.getWritableDatabase();
         //現在の曜日
-        String[] DaysOfWeek = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+        String[] DaysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         //dayOfWeekではSUNDAY(1)、MONDAY(2)、TUESDAY(3)、WEDNESDAY(4)、THURSDAY(5)、FRIDAY(6)、SATURDAY(7)
-        String currentDayOfWeek = DaysOfWeek[dayOfWeek - 2];
+        String currentDayOfWeek = DaysOfWeek[dayOfWeek-1];
         String[] projection = {
                 "id",
                 "day_of_week",

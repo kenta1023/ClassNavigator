@@ -59,7 +59,7 @@ public class MyWidget extends AppWidgetProvider {
         schedule.add(new Period("13:15", "14:55"));
         schedule.add(new Period("15:10", "16:50"));
         schedule.add(new Period("17:05", "18:45"));
-        String[] DaysOfWeek = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+        String[] DaysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         //データベース
         TimetableDbHelper helper = new TimetableDbHelper(context.getApplicationContext());
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -67,7 +67,7 @@ public class MyWidget extends AppWidgetProvider {
         Calendar calendar = Calendar.getInstance();
         Integer dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         //dayOfWeekではSUNDAY(1)、MONDAY(2)、TUESDAY(3)、WEDNESDAY(4)、THURSDAY(5)、FRIDAY(6)、SATURDAY(7)
-        String currentDayOfWeek = DaysOfWeek[dayOfWeek - 2];
+        String currentDayOfWeek = DaysOfWeek[dayOfWeek-1];
         // 現在時刻の取得
         Calendar currentTime = Calendar.getInstance();
         int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
