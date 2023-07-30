@@ -10,11 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.classnavigator.R;
 import com.example.classnavigator.TimetableDbHelper;
 import com.example.classnavigator.databinding.FragmentHomeBinding;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -42,6 +46,7 @@ public class HomeFragment extends Fragment {
         classrooms = timetableData.getClassrooms();
         periods = timetableData.getPeriods();
         showData(root);
+        setCurrentDate(root);
         setupCountdown();
         return root;
     }
@@ -50,12 +55,12 @@ public class HomeFragment extends Fragment {
         runnable = new Runnable() {
             @Override
             public void run() {
+                setCurrentDate(binding.getRoot());
                 // 現在の日付を取得
                 Calendar calendar = Calendar.getInstance();
                 // 月は0から始まるので+1する
                 String currentDate = String.format(Locale.getDefault(), "%04d-%02d-%02d",
                         calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
-
                 // 前回取得した日付と現在の日付を比較
                 if (!currentDate.equals(lastFetchedDate)) {
                     // 日付が変わった場合はデータを再取得して表示
@@ -73,6 +78,19 @@ public class HomeFragment extends Fragment {
             }
         };
         handler.postDelayed(runnable, 1000); // Initial delay 1 second (to align with the next second)
+    }
+
+    private void setCurrentDate(View root) {
+        TextView dateTextView = root.findViewById(R.id.dateTextView);
+        TextView timeTextView = root.findViewById(R.id.timeTextView);
+        Calendar calendar = Calendar.getInstance();
+        //日時を取得
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M月dd日 EEEE", Locale.getDefault());
+        dateTextView.setText(dateFormat.format(calendar.getTime()));
+        //時刻を取得
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        timeTextView.setText(timeFormat.format(calendar.getTime()));
+
     }
 
     private TimetableData getData() {
