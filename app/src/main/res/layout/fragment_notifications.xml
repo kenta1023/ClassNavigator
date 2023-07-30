@@ -11,6 +11,7 @@
         android:id="@+id/textAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text="追加" />
 
     <androidx.cardview.widget.CardView
@@ -55,43 +56,52 @@
                 android:minHeight="48dp"
                 android:hint="@string/hint_class_name" />
 
-            <!-- TextView for the Day of Week -->
-            <androidx.constraintlayout.widget.Barrier
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:barrierDirection="top" />
-
-            <TextView
-                android:id="@+id/textView4"
+            <!-- Horizontal LinearLayout for Day of Week -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_day_of_week" />
+                android:orientation="horizontal">
 
-            <!-- Spinner for the Day of Week -->
-            <Spinner
-                android:id="@+id/spinnerDayOfWeek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="200dp"
-                android:minHeight="48dp"
-                android:hint="@string/hint_day_of_week"
-                android:entries="@array/day_of_week_options" />
+                <!-- TextView for the Day of Week -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <!-- TextView for the Period -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/label_period" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_day_of_week" />
 
-            <!-- Spinner for the Period -->
-            <Spinner
-                android:id="@+id/spinnerPeriod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_period"
-                android:minWidth="200dp"
-                android:minHeight="48dp"
-                android:entries="@array/period_options" />
+                    <Spinner
+                        android:id="@+id/spinnerDayOfWeek"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/day_of_week_options"
+                        android:hint="@string/hint_day_of_week" />
+                </LinearLayout>
+
+                <!-- TextView for the Period -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_period" />
+
+                    <Spinner
+                        android:id="@+id/spinnerPeriod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/period_options"
+                        android:hint="@string/hint_period" />
+                </LinearLayout>
+            </LinearLayout>
 
             <!-- Button for adding data -->
             <Button
@@ -100,7 +110,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/button_add_data" />
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -108,7 +117,9 @@
         android:id="@+id/textDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:text="削除" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

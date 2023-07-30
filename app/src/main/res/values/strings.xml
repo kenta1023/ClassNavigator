@@ -27,6 +27,6 @@
     <string name="hint_day_of_week">曜日を選択</string>
     <string name="label_period">時間</string>
     <string name="hint_period">何時間目かを選択</string>
-    <string name="button_add_data">登録する</string>
+    <string name="button_add_data">追加する</string>
 
 </resources>
