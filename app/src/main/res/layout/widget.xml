@@ -3,7 +3,7 @@
     android:id="@+id/widget_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#B2B0ECB3"
+    android:background="@color/light_blue"
     android:orientation="vertical"
     android:padding="16dp">
 
