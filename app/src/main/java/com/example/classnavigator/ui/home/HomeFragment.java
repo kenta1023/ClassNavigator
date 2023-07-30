@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.example.classnavigator.MyWidget;
 import com.example.classnavigator.R;
 import com.example.classnavigator.TimetableDbHelper;
 import com.example.classnavigator.databinding.FragmentHomeBinding;
@@ -33,7 +35,9 @@ public class HomeFragment extends Fragment {
     private String lastFetchedDate = ""; // データを最後に取得した日付を保持する変数
     private String[] subjects;
     private String[] classrooms;
-    private String[] periods;
+    private String[] periods;   //授業時間のリスト作成
+
+    List<Period> schedule = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -146,7 +150,6 @@ public class HomeFragment extends Fragment {
     }
     private int getIntervalTime(String period){
         //授業時間のリスト作成
-        List<Period> schedule = new ArrayList<>();
         schedule.add(new Period("8:40", "10:20"));
         schedule.add(new Period("10:35", "12:15"));
         schedule.add(new Period("13:15", "14:55"));
@@ -189,7 +192,8 @@ public class HomeFragment extends Fragment {
                 times_display.add(formatTimeDifference(intervalTime));
                 subject_display.add(subjects[i]);
                 classroom_display.add(classrooms[i]);
-                periods_display.add(periods[i] + "限");
+                Period timePeriod = schedule.get(Integer.parseInt(periods[i])-1);
+                periods_display.add(periods[i] + "限(" + timePeriod.getStartTime() + "~" + timePeriod.getEndTime() + ")");
             }
         }
 
