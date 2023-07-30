@@ -129,25 +129,51 @@ public class NotificationsFragment extends Fragment {
 
         String subject = editSubject.getText().toString().trim();
         String classRoom = editClassRoom.getText().toString().trim();
-        String dayOfWeek = spinnerDayOfWeek.getSelectedItem().toString();
-        dayOfWeek = convertedDaysOfWeek[Arrays.asList(daysOfWeek).indexOf(dayOfWeek)];//日本語から英語に変換
+        String dayOfWeek_ja = spinnerDayOfWeek.getSelectedItem().toString();
+        String dayOfWeek = convertedDaysOfWeek[Arrays.asList(daysOfWeek).indexOf(dayOfWeek_ja)];//日本語から英語に変換
         int period = Integer.parseInt(spinnerPeriod.getSelectedItem().toString());
 
         TimetableDbHelper helper = new TimetableDbHelper(getContext());
         SQLiteDatabase db = helper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(TimetableDbHelper.COLUMN_SUBJECT, subject);
-        values.put(TimetableDbHelper.COLUMN_CLASSROOM, classRoom);
-        values.put(TimetableDbHelper.COLUMN_DAY_OF_WEEK, dayOfWeek);
-        values.put(TimetableDbHelper.COLUMN_PERIOD, period);
+        //登録前に重複にならないかチェック
+        String[] selectionArgs = {dayOfWeek, String.valueOf(period)};
+        String selection = TimetableDbHelper.COLUMN_DAY_OF_WEEK + " = ? AND " +
+                TimetableDbHelper.COLUMN_PERIOD + " = ?";
 
-        long newRowId = db.insert(TimetableDbHelper.TABLE_NAME, null, values);
+        Cursor cursor = db.query(
+                TimetableDbHelper.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
 
-        if (newRowId != -1) {
-            Toast.makeText(getContext(), "データ追加完了", Toast.LENGTH_SHORT).show();
+        if (cursor != null && cursor.getCount() > 0) {
+            // Duplicate combination found, show error message
+            Toast.makeText(getContext(), dayOfWeek_ja + "曜"+ period + "限のデータが既に存在します。", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "データの追加に失敗しました。", Toast.LENGTH_SHORT).show();
+            // No duplicate, proceed with insertion
+            ContentValues values = new ContentValues();
+            values.put(TimetableDbHelper.COLUMN_SUBJECT, subject);
+            values.put(TimetableDbHelper.COLUMN_CLASSROOM, classRoom);
+            values.put(TimetableDbHelper.COLUMN_DAY_OF_WEEK, dayOfWeek);
+            values.put(TimetableDbHelper.COLUMN_PERIOD, period);
+
+            long newRowId = db.insert(TimetableDbHelper.TABLE_NAME, null, values);
+
+            if (newRowId != -1) {
+                Toast.makeText(getContext(), "データ追加完了", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "データの追加に失敗しました。", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // Close cursor and database
+        if (cursor != null) {
+            cursor.close();
         }
         db.close();
     }

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:elevation="4dp">
+        android:elevation="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,9 +37,9 @@
                 android:id="@+id/editSubject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_subject"
                 android:minWidth="200dp"
-                android:minHeight="48dp"
-                android:hint="@string/hint_subject" />
+                android:minHeight="48dp" />
 
             <!-- TextView for the Class Name -->
             <TextView
@@ -52,9 +52,9 @@
                 android:id="@+id/editClassRoom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/hint_class_name"
                 android:minWidth="200dp"
-                android:minHeight="48dp"
-                android:hint="@string/hint_class_name" />
+                android:minHeight="48dp" />
 
             <!-- Horizontal LinearLayout for Day of Week -->
             <LinearLayout
@@ -124,7 +124,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:elevation="4dp">
+        android:elevation="20dp">
 
         <ListView
             android:id="@+id/listView"

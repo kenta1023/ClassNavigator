@@ -26,7 +26,8 @@ public class TimetableDbHelper extends SQLiteOpenHelper {
                     COLUMN_DAY_OF_WEEK + " TEXT," +
                     COLUMN_PERIOD + " INTEGER," +
                     COLUMN_SUBJECT + " TEXT," +
-                    COLUMN_CLASSROOM + " TEXT" +
+                    COLUMN_CLASSROOM + " TEXT," +
+                    "UNIQUE (" + COLUMN_DAY_OF_WEEK + ", " + COLUMN_PERIOD + ")" +
                     ")";
             db.execSQL(createTableQuery);
         }
