@@ -80,7 +80,15 @@ public class NotificationsFragment extends Fragment {
                 null,
                 null,
                 null,
-                null
+                "CASE day_of_week " +
+                        "WHEN 'Mon' THEN 0 " +
+                        "WHEN 'Tue' THEN 1 " +
+                        "WHEN 'Wed' THEN 2 " +
+                        "WHEN 'Thu' THEN 3 " +
+                        "WHEN 'Fri' THEN 4 " +
+                        "WHEN 'Sat' THEN 5 " +
+                        "WHEN 'Sun' THEN 6 " +
+                        "ELSE 7 END, period" // 曜日と時間を使用して順番に取り出す
         );
         List<String> data = new ArrayList<>();
         List<Integer> id_list = new ArrayList<>();
@@ -137,9 +145,9 @@ public class NotificationsFragment extends Fragment {
         long newRowId = db.insert(TimetableDbHelper.TABLE_NAME, null, values);
 
         if (newRowId != -1) {
-            Toast.makeText(getContext(), "データ登録完了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "データ追加完了", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "データの登録に失敗しました。", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "データの追加に失敗しました。", Toast.LENGTH_SHORT).show();
         }
         db.close();
     }
@@ -149,5 +157,6 @@ public class NotificationsFragment extends Fragment {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.delete("Timetable", "id=?", new String[]{String.valueOf(id)});
         db.close();
+        Toast.makeText(getContext(), "データ削除完了", Toast.LENGTH_SHORT).show();
     }
 }
