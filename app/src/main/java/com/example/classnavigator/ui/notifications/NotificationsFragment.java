@@ -61,7 +61,7 @@ public class NotificationsFragment extends Fragment {
         binding = null;
     }
 
-    private void showTimetableData() {
+    public void showTimetableData() {
         String[] daysOfWeek = {"月", "火", "水", "木", "金", "土", "日"};
         String[] convertedDaysOfWeek = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         TimetableDbHelper helper = new TimetableDbHelper(getContext());
@@ -89,28 +89,24 @@ public class NotificationsFragment extends Fragment {
             String subject = cursor.getString(cursor.getColumnIndexOrThrow("subject"));
             String classroom = cursor.getString(cursor.getColumnIndexOrThrow("classroom"));
             String dayOfWeek = cursor.getString(cursor.getColumnIndexOrThrow("day_of_week"));
-            dayOfWeek = daysOfWeek[Arrays.asList(convertedDaysOfWeek).indexOf(dayOfWeek)];//日本語から英語に変換
+            dayOfWeek = daysOfWeek[Arrays.asList(convertedDaysOfWeek).indexOf(dayOfWeek)]; // 日本語から英語に変換
             String period = cursor.getString(cursor.getColumnIndexOrThrow("period"));
 
-            String item = dayOfWeek+ "曜" + period + "限: " + subject + classroom;
+            String item = dayOfWeek + "曜" + period + "限: " + subject + classroom;
 
             data.add(item);
             id_list.add(id);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, data);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // リストアイテムがクリックされた時の処理
-                deleteData(id_list, position);
-                showTimetableData();
-            }
-        });
-
+        CustomArrayAdapter adapter = new CustomArrayAdapter(
+                getContext(),
+                R.layout.list_item_delete,
+                data,
+                id_list,
+                NotificationsFragment.this // Pass the fragment reference to the adapter
+        );
         cursor.close();
         db.close();
+        listView.setAdapter(adapter);
     }
 
 
@@ -148,11 +144,10 @@ public class NotificationsFragment extends Fragment {
         db.close();
     }
 
-    private void deleteData(List<Integer> id_list, int position) {
-        //id_listは表示されるidが順に入れられたリスト,positionは何番目に表示されたか→id_list[position]は選択されたデータのidの値
+    public void deleteData(int id) {
         TimetableDbHelper helper = new TimetableDbHelper(getContext());
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete("Timetable", "id=?", new String[]{String.valueOf(id_list.get(position))});
+        db.delete("Timetable", "id=?", new String[]{String.valueOf(id)});
         db.close();
     }
 }

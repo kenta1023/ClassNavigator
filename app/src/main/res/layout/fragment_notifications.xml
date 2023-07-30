@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- CardView for the whole card -->
+    <TextView
+        android:id="@+id/textAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="追加" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +56,13 @@
                 android:hint="@string/hint_class_name" />
 
             <!-- TextView for the Day of Week -->
+            <androidx.constraintlayout.widget.Barrier
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:barrierDirection="top" />
+
             <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/label_day_of_week" />
@@ -92,10 +104,22 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- ListView or other content below the card -->
-    <ListView
-        android:id="@+id/listView"
+    <TextView
+        android:id="@+id/textDelete"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:text="削除" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
